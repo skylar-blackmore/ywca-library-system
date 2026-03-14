@@ -84,8 +84,8 @@
 
     <h2>Borrow a Book</h2>
 
-    <!-- Form submits directly to Google Apps Script Web App -->
-    <form id="borrowForm" action="https://script.google.com/macros/s/AKfycbx_p4c5YZ0Evq5VXtw83CJb6yd0TNlfO8D_iEO09X_CAYh6Yxg_TwTQRbjRsZSoYOo9/exec" method="POST">
+    <!-- Direct form submit to Google Apps Script -->
+    <form id="borrowForm" action="https://script.google.com/macros/s/AKfycbx_p4c5YZ0Evq5VXtw83CJb6yd0TNlfO8D_iEO09X_CAYh6Yxg_TwTQRbjRsZSoYOo9/exec" method="POST" target="dummyFrame">
         <label>Book Number</label>
         <input type="text" name="BookNumber" placeholder="Enter book number" required>
 
@@ -111,11 +111,16 @@
 
 </div>
 
+<!-- Hidden iframe to handle POST without leaving page -->
+<iframe name="dummyFrame" style="display:none;"></iframe>
+
 <script>
-    // Optional: show a success message after submitting
+    // Redirect to homepage after submission
     document.getElementById('borrowForm').addEventListener('submit', function () {
-        alert('Borrow recorded successfully!');
-        this.reset();
+        // Wait a short moment for the POST to finish
+        setTimeout(function () {
+            window.location.href = 'index.html';
+        }, 500); // half a second
     });
 </script>
 
